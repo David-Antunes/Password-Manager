@@ -1,16 +1,10 @@
 package Handler;
-import Exceptions.AlreadyRegisteredException;
-import Exceptions.AuthException;
-import Exceptions.InvalidPasswordException;
-import User.User;
 
 public interface UserHandler {
 
-	public User getUser();
-	
-	public void login(String email, String password) throws AuthException, InvalidPasswordException;
-	
-	public boolean loginPassword(String password);
-	
-	public void register(String name, String email, String password) throws AlreadyRegisteredException;
+	public String getUser();
+
+	public boolean login(String email, String password);
+
+	public boolean register(String name, String email, String password);
 }
