@@ -1,4 +1,5 @@
 package Handler;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,12 +9,12 @@ import Exceptions.InvalidPasswordException;
 import User.User;
 import User.UserClass;
 
-public class HandlerClass implements Handler {
+public class UserHandlerClass implements UserHandler {
 
 	Map<String, User> users;
 	User currentUser;
 
-	public HandlerClass() {
+	public UserHandlerClass() {
 		users = new HashMap<String, User>();
 	}
 

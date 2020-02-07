@@ -4,7 +4,7 @@ import Exceptions.AuthException;
 import Exceptions.InvalidPasswordException;
 import User.User;
 
-public interface Handler {
+public interface UserHandler {
 
 	public User getUser();
 	
