@@ -7,6 +7,8 @@ import Handler.UserHandlerClass;
 
 public class Main {
 
+	private static final int MAX_ARGS = 10;
+
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Welcome!");
@@ -22,28 +24,46 @@ public class Main {
 		in.close();
 	}
 
+	/**
+	 * Prints the PROMPT and a waits for a token. Returns the a token form the
+	 * scanner and returns it without whitespace and in lower case.
+	 * 
+	 * @param in - Scanner Object
+	 * @return - a String trimmed and lowered case.
+	 */
 	private static String getCommand(Scanner in) {
 		System.out.print(">");
 		return in.next().trim().toLowerCase();
 	}
 
+	/**
+	 * Executes the corresponding option available. The available options are
+	 * 'login', 'register' and 'help'. Giving a non-existing command will return a
+	 * error message. The argument option should have been used with getCommand().
+	 * 
+	 * @param in     - Scanner Object to provide new inputs to the corresponding
+	 *               methods
+	 * @param fh     - UserHandler Object to work the user data
+	 * @param option - String to run the corresponding method
+	 * 
+	 */
 	private static void execOption(Scanner in, UserHandler fh, String option) {
 		switch (option) {
 
 		case "help":
-			help();
+			helpOutSession();
 			break;
 
 		case "login":
-			if (login(in, fh))
+			if (login(in, fh)) {
 				System.out.println("User authenticated with success.");
 				userSession(in, fh);
-			else
+			} else
 				System.out.println("Invalid email or password.");
 			break;
 
 		case "register":
-			if(register(in, fh))
+			if (register(in, fh))
 				System.out.println("User registered with success.");
 			else
 				System.out.println("Invalid email or password.");
@@ -54,12 +74,24 @@ public class Main {
 		}
 	}
 
-	private static void help() {
+	/**
+	 * Prints the available commands without being in session.
+	 */
+	private static void helpOutSession() {
 		System.out.println("login 		- Access the account registered.");
 		System.out.println("register 	- Registers a new account.");
 		System.out.println("help 		- Shows available commands.");
 	}
 
+	/**
+	 * Logins the user into the program. This method works when the scanner has two
+	 * tokens to be read, being a valid user email and its corresponding password.
+	 * Having only one token or above 2 will produce an error message.
+	 * 
+	 * @param in - Scanner Object to provide the tokens necessary to login the user
+	 * @param hl - UserHandler object to login the user
+	 * @return True if login() is successful, false otherwise.
+	 */
 	private static boolean login(Scanner in, UserHandler hl) {
 		String args[] = parseLine(in.nextLine());
 		if (args[0] == null || args[1] == null || args[2] != null)
@@ -68,6 +100,16 @@ public class Main {
 		return hl.login(args[0], args[1]);
 	}
 
+	/**
+	 * Registers a new user. This method works when the scanner has three tokens to
+	 * be read, being a name, a non-existing email and a password. Having lower or
+	 * higher than 3 tokens on the scanner will produce an error message.
+	 * 
+	 * @param in - Scanner Object to provide the tokens necessary to register the
+	 *           user
+	 * @param hl - UserHandler object to register the user
+	 * @return True if register() is successful, false otherwise.
+	 */
 	private static boolean register(Scanner in, UserHandler hl) {
 		String args[] = parseLine(in.nextLine());
 		if (args[0] == null || args[1] == null || args[2] == null || args[3] != null)
@@ -76,11 +118,23 @@ public class Main {
 		return hl.register(args[0], args[1], args[2]);
 	}
 
+	/**
+	 * This auxiliary method is used to parse a string and retrieve the various
+	 * arguments. This method only parses till 10 arguments, deleting the rest. If
+	 * the line has less than MAX_ARGS, than the remaining positions of the array
+	 * will be filled with null. The use of null is to check for errors, to be used
+	 * in the other methods. For example, in login() the null is used to verify if
+	 * there is an extra argument in the third position. If there is, than it is an
+	 * error.
+	 * 
+	 * @param line - String to be parsed
+	 * @return an array of strings containing the various arguments.
+	 */
 	private static String[] parseLine(String line) {
-		String[] args = new String[10];
+		String[] args = new String[MAX_ARGS];
 		Scanner scline = new Scanner(line);
 		int nargs = 0;
-		while (nargs < 10) {
+		while (nargs < MAX_ARGS) {
 			if (scline.hasNext())
 				args[nargs++] = scline.next().trim();
 			else
@@ -90,11 +144,27 @@ public class Main {
 		return args;
 	}
 
+	/**
+	 * Prints the name of the user + PROMPT and a waits for a token. Returns the a
+	 * token form the scanner and returns it without whitespace and in lower case.
+	 * 
+	 * @param in   - Scanner Object
+	 * @param user - name of the user in session
+	 * @return - a String trimmed and lowered case.
+	 */
 	private static String getUserCommand(Scanner in, String user) {
 		System.out.print(user + ">");
 		return in.nextLine().toLowerCase().trim();
 	}
 
+	/**
+	 * This method is a new command interpreter when a new user has logged on. In
+	 * this interpreter the prompt changes, adding the name of the user logged in,
+	 * and unlocks new functionalities that can be used.
+	 * 
+	 * @param in - Scanner Object to provide new inputs to the corresponding methods
+	 * @param hl - UserHandler object that has a User logged in
+	 */
 	private static void userSession(Scanner in, UserHandler hl) {
 		String option = getUserCommand(in, hl.getUser());
 
@@ -105,24 +175,40 @@ public class Main {
 		System.out.println("Signed Out.");
 	}
 
+	/**
+	 * Executes the corresponding option available. The available options are 'add',
+	 * 'remove' and 'help'. Giving a non-existing command will return a error
+	 * message. The argument option should have been used with getCommand().
+	 * 
+	 * @param in     - Scanner Object to provide new inputs to the corresponding
+	 *               methods
+	 * @param hl     - UserHandler object that has a User logged in and manipulate
+	 *               said user
+	 * @param option - String to run the corresponding method
+	 * 
+	 */
 	private static void execUserOptions(Scanner in, UserHandler hl, String option) {
 		switch (option) {
 
-		case "add":
-			add(in, hl);
+		case "help":
+			helpInSession();
 			break;
 
-		case "remove":
-			removeProgram(in, hl);
-			break;
-
-		case "listprogram":
-			listAProgram(in, hl);
-			break;
-
-		case "listall":
-			listAll(hl);
-			break;
+//		case "add":
+//			add(in, hl);
+//			break;
+//
+//		case "remove":
+//			removeProgram(in, hl);
+//			break;
+//
+//		case "listprogram":
+//			listAProgram(in, hl);
+//			break;
+//
+//		case "listall":
+//			listAll(hl);
+//			break;
 
 		default:
 			System.out.println("Unknown Command. Type help to see the available commands.");
@@ -131,27 +217,38 @@ public class Main {
 
 	}
 
-	private static void add(Scanner input, UserHandler user) {
-		System.out.print("Insert program name: ");
-		String progName = input.nextLine();
-		System.out.print("Insert ID: ");
-		String ID = input.nextLine();
-		System.out.print("Insert extra parameters: ");
-		int extraNumber = input.nextInt();
-		input.nextLine();
-		String[] extra = null;
-		if (extraNumber > 0) {
-			extra = new String[extraNumber];
-			for (int i = 0; i < extraNumber; i++) {
-				extra[i] = input.nextLine();
-			}
-		}
-		System.out.print("Insert password: ");
-		String password = input.nextLine();
-
-		user.add(progName, ID, extra, password);
-		System.out.println("Program added.");
+	/**
+	 * Prints the available commands when being in session.
+	 */
+	private static void helpInSession() {
+		System.out.println("add 			- Access the account registered.");
+		System.out.println("remove 			- Registers a new account.");
+		System.out.println("removeProgram 	- Shows available commands.");
+		System.out.println("listprogram 	- Shows available commands.");
+		System.out.println("listall 		- Shows available commands.");
 	}
+//
+//	private static void add(Scanner input, UserHandler user) {
+//		System.out.print("Insert program name: ");
+//		String progName = input.nextLine();
+//		System.out.print("Insert ID: ");
+//		String ID = input.nextLine();
+//		System.out.print("Insert extra parameters: ");
+//		int extraNumber = input.nextInt();
+//		input.nextLine();
+//		String[] extra = null;
+//		if (extraNumber > 0) {
+//			extra = new String[extraNumber];
+//			for (int i = 0; i < extraNumber; i++) {
+//				extra[i] = input.nextLine();
+//			}
+//		}
+//		System.out.print("Insert password: ");
+//		String password = input.nextLine();
+//
+//		user.add(progName, ID, extra, password);
+//		System.out.println("Program added.");
+//	}
 //
 //	private static void removeProgram(Scanner input, UserHandler user) {
 //		System.out.print("Insert program name: ");
