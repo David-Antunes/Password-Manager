@@ -260,6 +260,17 @@ public class Main {
 		System.out.println("quit 			- Quits current session.");
 	}
 
+	/**
+	 * Adds a new program to the user in session. This command should have a token
+	 * ready to be read that corresponds to the name of the program to be added. If
+	 * there is non, then it will print its functionality. A program consists of
+	 * having a name, a id, a password, and any extra parameters the user want to
+	 * add.
+	 * 
+	 * @param in - Scanner Object to provide new inputs to the corresponding methods
+	 * @param hl - UserHandler object that has a User logged in and manipulate said
+	 *           user
+	 */
 	private static void add(Scanner in, UserHandler hl) {
 		String name = in.nextLine().strip();
 		if (name.isBlank()) {
@@ -295,6 +306,17 @@ public class Main {
 		}
 	}
 
+	/**
+	 * Removes a program to the user in session. This command should two tokens to
+	 * be read that corresponds to the name of the program and its id. If there is
+	 * non, then it will print its functionality. This method will tell if the
+	 * remove was successful or not. Any more arguments put after the command will
+	 * make the method print how the command functions.
+	 * 
+	 * @param in - Scanner Object to provide new inputs to the corresponding methods
+	 * @param hl - UserHandler object that has a User logged in and manipulate said
+	 *           user
+	 */
 	private static void remove(Scanner in, UserHandler hl) {
 
 		String args[] = parseLine(in.nextLine());
@@ -314,6 +336,12 @@ public class Main {
 		}
 	}
 
+	/**
+	 * Lists all the programs present in the User.
+	 * 
+	 * @param hl - UserHandler object that has a User logged in and manipulate said
+	 *           user
+	 */
 	private static void listAll(UserHandler hl) {
 		Iterator<List<Program>> programs;
 		try {
@@ -331,6 +359,12 @@ public class Main {
 		}
 	}
 
+	/**
+	 * Lists all the programs with the same name of the user.
+	 * 
+	 * @param hl - UserHandler object that has a User logged in and manipulate said
+	 *           user
+	 */
 	private static void listAProgram(Scanner in, UserHandler hl) {
 
 		String progName = in.nextLine().strip();
@@ -345,6 +379,11 @@ public class Main {
 
 	}
 
+	/**
+	 * This function prints the information inside an iterator with programs in it.
+	 * 
+	 * @param it - iterator with Programs to be printed
+	 */
 	private static void printProgram(Iterator<Program> it) {
 		while (it.hasNext()) {
 			Program auxProgram = it.next();
