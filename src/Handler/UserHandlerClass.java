@@ -20,6 +20,16 @@ import User.User;
 import User.UserClass;
 import User.UserModifier;
 
+/**
+ * 
+ * @author David-Antunes
+ * 
+ *         This class handles the various registered users and their programs.
+ *         It uses an HashMap for that purpose.
+ * 
+ *         To use this class properly, you need to first register a user, than
+ *         log in that user, and after that the remaining functions can be used.
+ */
 public class UserHandlerClass implements UserHandler {
 
 	private static final int MIN_USERS = 50;

@@ -1,5 +1,11 @@
 package SessionsExceptions;
 
+/**
+ * 
+ * @author David-Antunes
+ * 
+ *         This exception is to be used when there is no user in Session
+ */
 public class NotInSessionException extends Exception {
 
 	private static final long serialVersionUID = 1L;

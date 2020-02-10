@@ -10,6 +10,14 @@ import java.util.TreeMap;
 import Program.Program;
 import SessionsExceptions.NoProgramException;
 
+/**
+ * 
+ * @author David-Antunes
+ *
+ *
+ *         This class holds the information regarding of a user. It holds its
+ *         name, email and password.
+ */
 public abstract class AbstractUserClass implements User, Serializable {
 
 	private static final long serialVersionUID = 1L;

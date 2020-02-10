@@ -1,6 +1,5 @@
 package User;
 
-import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,6 +8,14 @@ import Program.Program;
 import Program.ProgramClass;
 import SessionsExceptions.NoProgramException;
 
+/**
+ * 
+ * @author David-Antunes
+ *
+ *
+ *         This class extends its abstract class, and also has modifying methods
+ *         to operate the various programs such as adding and removing programs.
+ */
 public class UserClass extends AbstractUserClass implements User, UserModifier {
 
 	private static final long serialVersionUID = 1626255755598654713L;
@@ -31,6 +38,7 @@ public class UserClass extends AbstractUserClass implements User, UserModifier {
 		prog.add(program);
 	}
 
+	@Override
 	public void remove(String name, String id) throws NoProgramException {
 		List<Program> prog = programs.get(name);
 
