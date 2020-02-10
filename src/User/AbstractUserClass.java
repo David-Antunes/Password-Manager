@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import Program.Program;
+import SessionsExceptions.NoProgramException;
 
 public abstract class AbstractUserClass implements User {
 
@@ -39,12 +40,24 @@ public abstract class AbstractUserClass implements User {
 	}
 
 	@Override
-	public Iterator<Program> getAProgram(String progName) {
-		return programs.get(progName).iterator();
+	public Iterator<Program> getAProgram(String progName) throws NoProgramException {
+
+		if (programs.isEmpty())
+			throw new NoProgramException();
+
+		List<Program> programList = programs.get(progName);
+
+		if (programList == null)
+			throw new NoProgramException();
+
+		return programList.iterator();
 	}
 
 	@Override
-	public Iterator<List<Program>> getAllPrograms() {
+	public Iterator<List<Program>> getAllPrograms() throws NoProgramException {
+
+		if (programs.isEmpty())
+			throw new NoProgramException();
 
 		Iterator<String> keys = programs.keySet().iterator();
 		List<List<Program>> progSets = new ArrayList<List<Program>>();

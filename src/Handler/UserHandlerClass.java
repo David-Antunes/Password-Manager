@@ -1,8 +1,11 @@
 package Handler;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+import Program.Program;
 import SessionsExceptions.InSessionException;
 import SessionsExceptions.NoProgramException;
 import SessionsExceptions.NotInSessionException;
@@ -83,7 +86,25 @@ public class UserHandlerClass implements UserHandler {
 			throw new NotInSessionException();
 
 		UserModifier user = (UserModifier) currentUser;
-			user.remove(name, id);
+		user.remove(name, id);
 
+	}
+
+	@Override
+	public Iterator<List<Program>> getAllPrograms() throws NotInSessionException, NoProgramException {
+
+		if (currentUser == null)
+			throw new NotInSessionException();
+
+		return currentUser.getAllPrograms();
+	}
+
+	@Override
+	public Iterator<Program> getProgram(String progName) throws NotInSessionException, NoProgramException {
+
+		if (currentUser == null)
+			throw new NotInSessionException();
+
+		return currentUser.getAProgram(progName);
 	}
 }

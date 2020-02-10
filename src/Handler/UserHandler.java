@@ -1,5 +1,9 @@
 package Handler;
 
+import java.util.Iterator;
+import java.util.List;
+
+import Program.Program;
 import SessionsExceptions.InSessionException;
 import SessionsExceptions.NoProgramException;
 import SessionsExceptions.NotInSessionException;
@@ -54,4 +58,8 @@ public interface UserHandler {
 	public void addProgram(String name, String id, String password, String[] extra) throws NotInSessionException;
 
 	public void removeProgram(String name, String id) throws NotInSessionException, NoProgramException;
+
+	public Iterator<List<Program>> getAllPrograms() throws NotInSessionException, NoProgramException;
+
+	public Iterator<Program> getProgram(String progName) throws NotInSessionException, NoProgramException;
 }

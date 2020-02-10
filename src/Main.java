@@ -1,7 +1,10 @@
+import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 import Handler.UserHandler;
 import Handler.UserHandlerClass;
+import Program.Program;
 import SessionsExceptions.InSessionException;
 import SessionsExceptions.NoProgramException;
 import SessionsExceptions.NotInSessionException;
@@ -229,13 +232,13 @@ public class Main {
 			remove(in, hl);
 			break;
 
-//		case "listprogram":
-//			listAProgram(in, hl);
-//			break;
-//
-//		case "listall":
-//			listAll(hl);
-//			break;
+		case "listprogram":
+			listAProgram(in, hl);
+			break;
+
+		case "listall":
+			listAll(hl);
+			break;
 
 		default:
 			System.out.println("Unknown Command. Type help to see the available commands.");
@@ -309,36 +312,49 @@ public class Main {
 		}
 	}
 
-//	private static void listAll(UserHandler user) {
-//		Iterator<List<Program>> programs = user.getAllPrograms();
-//
-//		System.out.println();
-//		while (programs.hasNext()) {
-//			List<Program> program = programs.next();
-//			printProgram(program.iterator());
-//		}
-//	}
-//
-//	private static void listAProgram(Scanner input, UserHandler user) {
-//		System.out.println("Insert program name: ");
-//		String progName = input.nextLine();
-//		System.out.println();
-//		printProgram(user.getAProgram(progName));
-//
-//	}
-//
-//	private static void printProgram(Iterator<Program> it) {
-//		while (it.hasNext()) {
-//			Program auxProgram = it.next();
-//			System.out.println("Program: " + auxProgram.getProgName());
-//			System.out.println("ID: " + auxProgram.getID());
-//			String[] extra = auxProgram.getExtra();
-//			if (extra != null)
-//				for (int i = 0; i < extra.length; i++) {
-//					System.out.print("extra: " + extra[i] + "\n");
-//				}
-//			System.out.println("password: " + auxProgram.getPassword());
-//			System.out.println();
-//		}
-//	}
+	private static void listAll(UserHandler hl) {
+		Iterator<List<Program>> programs;
+		try {
+			programs = hl.getAllPrograms();
+
+			System.out.println();
+			while (programs.hasNext()) {
+				List<Program> program = programs.next();
+				printProgram(program.iterator());
+			}
+		} catch (NoProgramException e) {
+			System.out.println("There is no program.");
+		} catch (NotInSessionException e) {
+			System.out.println("You need to login to do that.");
+		}
+	}
+
+	private static void listAProgram(Scanner in, UserHandler hl) {
+
+		String progName = in.nextLine().strip();
+		System.out.println();
+		try {
+			printProgram(hl.getProgram(progName));
+		} catch (NoProgramException e) {
+			System.out.println("There is no program with that name.");
+		} catch (NotInSessionException e) {
+			System.out.println("You need to login to do that.");
+		}
+
+	}
+
+	private static void printProgram(Iterator<Program> it) {
+		while (it.hasNext()) {
+			Program auxProgram = it.next();
+			System.out.println("Program: " + auxProgram.getName());
+			System.out.println("ID: " + auxProgram.getID());
+			System.out.println("password: " + auxProgram.getPassword());
+			String[] extra = auxProgram.getExtra();
+			if (extra != null)
+				for (int i = 0; i < extra.length; i++) {
+					System.out.print("extra: " + extra[i] + "\n");
+				}
+			System.out.println();
+		}
+	}
 }
