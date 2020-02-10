@@ -1,5 +1,7 @@
 package User;
 
+import SessionsExceptions.NoProgramException;
+
 public interface UserModifier extends User {
 
 	/**
@@ -18,5 +20,5 @@ public interface UserModifier extends User {
 	 * @param name - name of the program
 	 * @param ID   - id of the program
 	 */
-	void remove(String name, String id);
+	void remove(String name, String id) throws NoProgramException;
 }

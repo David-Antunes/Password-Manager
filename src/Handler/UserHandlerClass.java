@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import SessionsExceptions.InSessionException;
+import SessionsExceptions.NoProgramException;
 import SessionsExceptions.NotInSessionException;
 import User.User;
 import User.UserClass;
@@ -76,13 +77,13 @@ public class UserHandlerClass implements UserHandler {
 	}
 
 	@Override
-	public void removeProgram(String name, String id) throws NotInSessionException {
+	public void removeProgram(String name, String id) throws NotInSessionException, NoProgramException {
 
 		if (currentUser == null)
 			throw new NotInSessionException();
 
 		UserModifier user = (UserModifier) currentUser;
-		user.remove(name, id);
+			user.remove(name, id);
 
 	}
 }

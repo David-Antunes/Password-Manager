@@ -5,7 +5,7 @@ public abstract class AbstractProgramClass implements Program {
 	protected String program, ID, password;
 	protected String[] extra;
 
-	public AbstractProgramClass(String name, String password, String id, String[] extra) {
+	public AbstractProgramClass(String name, String id, String password, String[] extra) {
 		program = name;
 		this.password = password;
 		this.ID = id;

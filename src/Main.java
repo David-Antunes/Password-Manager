@@ -3,6 +3,7 @@ import java.util.Scanner;
 import Handler.UserHandler;
 import Handler.UserHandlerClass;
 import SessionsExceptions.InSessionException;
+import SessionsExceptions.NoProgramException;
 import SessionsExceptions.NotInSessionException;
 
 public class Main {
@@ -179,7 +180,7 @@ public class Main {
 	 */
 	private static String getUserCommand(Scanner in, String user) {
 		System.out.print(user + ">");
-		return in.nextLine().toLowerCase().trim();
+		return in.next().toLowerCase().trim();
 	}
 
 	/**
@@ -195,7 +196,7 @@ public class Main {
 
 		while (!option.equals("quit")) {
 			execUserOptions(in, hl, option);
-			option = getUserCommand(in, option);
+			option = getUserCommand(in, hl.getUser());
 		}
 		hl.clearSession();
 		System.out.println("Signed Out.");
@@ -225,7 +226,7 @@ public class Main {
 			break;
 
 		case "remove":
-			removeProgram(in, hl);
+			remove(in, hl);
 			break;
 
 //		case "listprogram":
@@ -254,42 +255,57 @@ public class Main {
 		System.out.println("quit 			- Quits current session.");
 	}
 
-	private static void add(Scanner input, UserHandler hl) {
-		System.out.print("Insert program name: ");
-		String progName = input.nextLine();
-		System.out.print("Insert ID: ");
-		String ID = input.nextLine();
-		System.out.print("Insert extra parameters: ");
-		int extraNumber = input.nextInt();
-		input.nextLine();
-		String[] extra = null;
-		if (extraNumber > 0) {
-			extra = new String[extraNumber];
-			for (int i = 0; i < extraNumber; i++) {
-				extra[i] = input.nextLine();
+	private static void add(Scanner in, UserHandler hl) {
+		String name = in.nextLine().strip();
+		if (name.isBlank()) {
+			System.out.println("add (program name)");
+			System.out.println("(program id)");
+			System.out.println("(program password)");
+			System.out.println("(number of parameters)");
+			System.out.println("(program parameters)");
+		} else {
+			String progName = name;
+			System.out.print("Insert ID: ");
+			String ID = in.nextLine();
+			System.out.print("Insert password: ");
+			String password = in.nextLine();
+			System.out.print("Insert number of extra parameters: ");
+			int extraNumber = in.nextInt();
+			in.nextLine();
+			System.out.println("Input your extra parameters.");
+			String[] extra = null;
+			if (extraNumber > 0) {
+				extra = new String[extraNumber];
+				for (int i = 0; i < extraNumber; i++) {
+					extra[i] = in.nextLine();
+				}
 			}
-		}
-		System.out.print("Insert password: ");
-		String password = input.nextLine();
 
-		try {
-			hl.addProgram(progName, ID, password, extra);
-			System.out.println("Program added.");
-		} catch (NotInSessionException e) {
-			System.out.println("You need to login to do that.");
+			try {
+				hl.addProgram(progName, ID, password, extra);
+				System.out.println("Program added.");
+			} catch (NotInSessionException e) {
+				System.out.println("You need to login to do that.");
+			}
 		}
 	}
 
-	private static void removeProgram(Scanner input, UserHandler hl) {
-		System.out.print("Insert program name: ");
-		String progName = input.nextLine();
-		System.out.print("Insert ID: ");
-		String ID = input.nextLine();
+	private static void remove(Scanner in, UserHandler hl) {
 
-		try {
-			hl.removeProgram(progName, ID);
-		} catch (NotInSessionException e) {
-			System.out.println("You need to login to do that.");
+		String args[] = parseLine(in.nextLine());
+
+		if (args[0] == null || args[1] == null || args[2] != null) {
+			System.out.println("remove (program name) (program id)");
+		} else {
+			try {
+				hl.removeProgram(args[0], args[1]);
+				System.out.println("Program removed.");
+			} catch (NoProgramException e) {
+				System.out.println("There is no program with that name or id.");
+			} catch (NotInSessionException e) {
+				System.out.println("You need to login to do that.");
+			}
+
 		}
 	}
 

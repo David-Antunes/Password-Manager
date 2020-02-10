@@ -1,6 +1,7 @@
 package Handler;
 
 import SessionsExceptions.InSessionException;
+import SessionsExceptions.NoProgramException;
 import SessionsExceptions.NotInSessionException;
 
 public interface UserHandler {
@@ -52,5 +53,5 @@ public interface UserHandler {
 	 */
 	public void addProgram(String name, String id, String password, String[] extra) throws NotInSessionException;
 
-	public void removeProgram(String name, String id) throws NotInSessionException;
+	public void removeProgram(String name, String id) throws NotInSessionException, NoProgramException;
 }
