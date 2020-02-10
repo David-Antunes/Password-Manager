@@ -1,4 +1,4 @@
-package User;
+package Program;
 
 public class ProgramClass extends AbstractProgramClass implements Program, ProgramModifier {
 

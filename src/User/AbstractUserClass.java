@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import Program.Program;
+
 public abstract class AbstractUserClass implements User {
 
 	protected String email, name, password;

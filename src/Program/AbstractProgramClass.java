@@ -1,4 +1,4 @@
-package User;
+package Program;
 
 public abstract class AbstractProgramClass implements Program {
 
@@ -13,7 +13,7 @@ public abstract class AbstractProgramClass implements Program {
 	}
 
 	@Override
-	public String getProgName() {
+	public String getName() {
 		return program;
 	}
 

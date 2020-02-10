@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import Program.Program;
+import Program.ProgramClass;
+
 public class UserClass extends AbstractUserClass implements User, UserModifier, Serializable {
 
 	private static final long serialVersionUID = 1626255755598654713L;
