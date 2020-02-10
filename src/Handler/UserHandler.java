@@ -1,6 +1,7 @@
 package Handler;
 
 import SessionsExceptions.InSessionException;
+import SessionsExceptions.NotInSessionException;
 
 public interface UserHandler {
 
@@ -11,7 +12,7 @@ public interface UserHandler {
 	 * @return the name of the user
 	 */
 	public String getUser();
-	
+
 	/**
 	 * Clears the current user in Session
 	 */
@@ -42,4 +43,14 @@ public interface UserHandler {
 	 * @throws InSessionException if there is already a user logged in
 	 */
 	public boolean register(String name, String email, String password) throws InSessionException;
+
+	/**
+	 * Adds a new program to the user.
+	 * 
+	 * @return
+	 * @throws NotInSessionException
+	 */
+	public void addProgram(String name, String id, String password, String[] extra) throws NotInSessionException;
+
+	public void removeProgram(String name, String id) throws NotInSessionException;
 }

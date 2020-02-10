@@ -10,7 +10,7 @@ public interface UserModifier extends User {
 	 * @param extra    - extra description of the program
 	 * @param password - password of the program
 	 */
-	void add(String name, String ID, String[] extra, String password);
+	void add(String name, String id, String password, String[] extra);
 
 	/**
 	 * Removes a program from the user
@@ -18,5 +18,5 @@ public interface UserModifier extends User {
 	 * @param name - name of the program
 	 * @param ID   - id of the program
 	 */
-	void remove(String name, String ID);
+	void remove(String name, String id);
 }

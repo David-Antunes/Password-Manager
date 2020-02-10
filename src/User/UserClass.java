@@ -12,17 +12,17 @@ public class UserClass extends AbstractUserClass implements User, UserModifier, 
 
 	private static final long serialVersionUID = 1626255755598654713L;
 
-	public UserClass( String name, String email, String password) {
+	public UserClass(String name, String email, String password) {
 
 		super(name, email, password);
 
 	}
 
 	@Override
-	public void add(String name, String ID, String[] extra, String password) {
+	public void add(String name, String ID, String password, String[] extra) {
 
 		List<Program> prog = programs.get(name);
-		Program program = new ProgramClass(name, password, ID, extra);
+		Program program = new ProgramClass(name, ID, password, extra);
 		if ((prog = programs.get(name)) == null) {
 			prog = new LinkedList<Program>();
 			programs.put(name, prog);

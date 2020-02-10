@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import SessionsExceptions.InSessionException;
+import SessionsExceptions.NotInSessionException;
 import User.User;
 import User.UserClass;
+import User.UserModifier;
 
 public class UserHandlerClass implements UserHandler {
 
@@ -62,5 +64,25 @@ public class UserHandlerClass implements UserHandler {
 		}
 
 		return valid;
+	}
+
+	@Override
+	public void addProgram(String name, String id, String password, String[] extra) throws NotInSessionException {
+		if (currentUser == null)
+			throw new NotInSessionException();
+
+		UserModifier user = (UserModifier) currentUser;
+		user.add(name, id, password, extra);
+	}
+
+	@Override
+	public void removeProgram(String name, String id) throws NotInSessionException {
+
+		if (currentUser == null)
+			throw new NotInSessionException();
+
+		UserModifier user = (UserModifier) currentUser;
+		user.remove(name, id);
+
 	}
 }
