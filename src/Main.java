@@ -1,9 +1,8 @@
 import java.util.Scanner;
 
-import Exceptions.AuthException;
-import Exceptions.InvalidPasswordException;
 import Handler.UserHandler;
 import Handler.UserHandlerClass;
+import SessionsExceptions.InSessionException;
 
 public class Main {
 
@@ -97,7 +96,12 @@ public class Main {
 		if (args[0] == null || args[1] == null || args[2] != null)
 			System.out.println("login (user email) (password)");
 
-		return hl.login(args[0], args[1]);
+		try {
+			return hl.login(args[0], args[1]);
+		} catch (InSessionException e) {
+			System.out.println("Can't do that while in session.");
+			return false;
+		}
 	}
 
 	/**
@@ -115,7 +119,12 @@ public class Main {
 		if (args[0] == null || args[1] == null || args[2] == null || args[3] != null)
 			System.out.println("register (user name) (user email) (password)");
 
-		return hl.register(args[0], args[1], args[2]);
+		try {
+			return hl.register(args[0], args[1], args[2]);
+		} catch (InSessionException e) {
+			System.out.println("Can't do that while in session.");
+			return false;
+		}
 	}
 
 	/**
@@ -163,7 +172,7 @@ public class Main {
 	 * and unlocks new functionalities that can be used.
 	 * 
 	 * @param in - Scanner Object to provide new inputs to the corresponding methods
-	 * @param hl - UserHandler object that has a User logged in
+	 * @param hl - UserHandler object that has a user logged in
 	 */
 	private static void userSession(Scanner in, UserHandler hl) {
 		String option = getUserCommand(in, hl.getUser());

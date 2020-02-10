@@ -1,4 +1,5 @@
 package User;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +13,7 @@ public class UserClass implements User, Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1626255755598654713L;
-	
+
 	String email, name, password;
 	Map<String, List<Program>> programs;
 
