@@ -13,7 +13,7 @@ public abstract class AbstractUserClass implements User {
 	protected String email, name, password;
 	protected Map<String, List<Program>> programs;
 
-	public AbstractUserClass(String email, String name, String password) {
+	public AbstractUserClass(String name, String email, String password) {
 
 		this.email = email;
 		this.name = name;

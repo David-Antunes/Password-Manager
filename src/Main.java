@@ -54,18 +54,12 @@ public class Main {
 			break;
 
 		case "login":
-			if (login(in, fh)) {
-				System.out.println("User authenticated with success.");
+			if (login(in, fh))
 				userSession(in, fh);
-			} else
-				System.out.println("Invalid email or password.");
 			break;
 
 		case "register":
-			if (register(in, fh))
-				System.out.println("User registered with success.");
-			else
-				System.out.println("Invalid email or password.");
+			register(in, fh);
 			break;
 
 		default:
@@ -93,11 +87,21 @@ public class Main {
 	 */
 	private static boolean login(Scanner in, UserHandler hl) {
 		String args[] = parseLine(in.nextLine());
-		if (args[0] == null || args[1] == null || args[2] != null)
+
+		if (args[0] == null || args[1] == null || args[2] != null) {
 			System.out.println("login (user email) (password)");
+			return false;
+		}
 
 		try {
-			return hl.login(args[0], args[1]);
+			boolean success = hl.login(args[0], args[1]);
+
+			if (success) {
+				System.out.println("User authenticated with success.");
+			} else
+				System.out.println("Invalid email or password.");
+
+			return success;
 		} catch (InSessionException e) {
 			System.out.println("Can't do that while in session.");
 			return false;
@@ -116,11 +120,22 @@ public class Main {
 	 */
 	private static boolean register(Scanner in, UserHandler hl) {
 		String args[] = parseLine(in.nextLine());
-		if (args[0] == null || args[1] == null || args[2] == null || args[3] != null)
+
+		if (args[0] == null || args[1] == null || args[2] == null || args[3] != null) {
 			System.out.println("register (user name) (user email) (password)");
+			return false;
+		}
 
 		try {
-			return hl.register(args[0], args[1], args[2]);
+			boolean success = hl.register(args[0], args[1], args[2]);
+
+			if (success) {
+				System.out.println("User registered with success.");
+			} else
+				System.out.println("Invalid email.");
+
+			return success;
+
 		} catch (InSessionException e) {
 			System.out.println("Can't do that while in session.");
 			return false;
@@ -177,10 +192,11 @@ public class Main {
 	private static void userSession(Scanner in, UserHandler hl) {
 		String option = getUserCommand(in, hl.getUser());
 
-		while (!option.equals("leave")) {
+		while (!option.equals("quit")) {
 			execUserOptions(in, hl, option);
 			option = getUserCommand(in, option);
 		}
+		hl.clearSession();
 		System.out.println("Signed Out.");
 	}
 
@@ -230,11 +246,11 @@ public class Main {
 	 * Prints the available commands when being in session.
 	 */
 	private static void helpInSession() {
-		System.out.println("add 			- Access the account registered.");
-		System.out.println("remove 			- Registers a new account.");
-		System.out.println("removeProgram 	- Shows available commands.");
-		System.out.println("listprogram 	- Shows available commands.");
-		System.out.println("listall 		- Shows available commands.");
+		System.out.println("add 			- Adds a new program.");
+		System.out.println("remove 			- Removes a program.");
+		System.out.println("listprogram 	- Lists the contents of a program.");
+		System.out.println("listall 		- Lists all programs.");
+		System.out.println("quit 			- Quits current session.");
 	}
 //
 //	private static void add(Scanner input, UserHandler user) {

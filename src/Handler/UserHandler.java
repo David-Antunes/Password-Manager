@@ -11,6 +11,11 @@ public interface UserHandler {
 	 * @return the name of the user
 	 */
 	public String getUser();
+	
+	/**
+	 * Clears the current user in Session
+	 */
+	public void clearSession();
 
 	/**
 	 * Logins the stored user into the program. Having a user in session unlocks new
