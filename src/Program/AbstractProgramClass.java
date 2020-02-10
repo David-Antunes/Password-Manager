@@ -1,7 +1,10 @@
 package Program;
 
-public abstract class AbstractProgramClass implements Program {
+import java.io.Serializable;
 
+public abstract class AbstractProgramClass implements Program, Serializable {
+
+	private static final long serialVersionUID = 1L;
 	protected String program, ID, password;
 	protected String[] extra;
 

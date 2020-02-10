@@ -9,7 +9,7 @@ import Program.Program;
 import Program.ProgramClass;
 import SessionsExceptions.NoProgramException;
 
-public class UserClass extends AbstractUserClass implements User, UserModifier, Serializable {
+public class UserClass extends AbstractUserClass implements User, UserModifier {
 
 	private static final long serialVersionUID = 1626255755598654713L;
 

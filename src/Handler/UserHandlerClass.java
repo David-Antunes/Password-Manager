@@ -1,5 +1,12 @@
 package Handler;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -106,5 +113,38 @@ public class UserHandlerClass implements UserHandler {
 			throw new NotInSessionException();
 
 		return currentUser.getAProgram(progName);
+	}
+
+	@SuppressWarnings("unchecked")
+	public void loadUserData(String name) {
+		try {
+			ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(name));
+
+			users = (Map<String, User>) inStream.readObject();
+			inStream.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("Could not read file " + name + ".");
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("file " + name + " doesn't exist.");
+		}
+
+	}
+
+	public void writeUserData(String name) {
+		try {
+			File file = new File(name);
+			if (!file.exists())
+				file.createNewFile();
+			ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(name));
+			outStream.writeObject(users);
+			outStream.flush();
+			outStream.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("file " + name + "doesn't exist.");
+		} catch (IOException e) {
+			System.out.println("Could not write to file " + name + ".");
+		}
 	}
 }

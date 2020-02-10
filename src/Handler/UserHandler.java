@@ -52,14 +52,57 @@ public interface UserHandler {
 	/**
 	 * Adds a new program to the user.
 	 * 
-	 * @return
-	 * @throws NotInSessionException
+	 * @param name     - name of the program
+	 * @param id       - id of the program
+	 * @param password - password of the program
+	 * @param extra    - extra parameters necessary to the program
+	 * @throws NotInSessionException if there is no user logged in
 	 */
 	public void addProgram(String name, String id, String password, String[] extra) throws NotInSessionException;
 
+	/**
+	 * Removes a program present in the user.
+	 * 
+	 * @param name - name of the program
+	 * @param id   - id of the program
+	 * @throws NotInSessionException if there is no user logged in
+	 * @throws NoProgramException    if there is no program registered
+	 */
 	public void removeProgram(String name, String id) throws NotInSessionException, NoProgramException;
 
+	/**
+	 * Returns an iterator with all the programs. It is necessary to save each list
+	 * from the iterator to iterate all the different ids present in the same
+	 * program.
+	 * 
+	 * @return An iterator with the different programs and ids.
+	 * @throws NotInSessionException if there is no user logged in
+	 * @throws NoProgramException    if there is no program registered
+	 */
 	public Iterator<List<Program>> getAllPrograms() throws NotInSessionException, NoProgramException;
 
+	/**
+	 * Returns an iterator with the programs with the same name.
+	 * 
+	 * @param progName - name of the program
+	 * @return an iterator with the programs with the same name.
+	 * @throws NotInSessionException if there is no user logged in
+	 * @throws NoProgramException    if there is no program registered
+	 */
 	public Iterator<Program> getProgram(String progName) throws NotInSessionException, NoProgramException;
+
+	/**
+	 * Loads the data from the given name file
+	 * 
+	 * @param name - name of the file
+	 */
+	public void loadUserData(String name);
+
+	/**
+	 * Writes the user data to the given name file
+	 * 
+	 * @param name - name of the file
+	 */
+	public void writeUserData(String name);
+
 }

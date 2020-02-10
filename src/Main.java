@@ -17,6 +17,7 @@ public class Main {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Welcome!");
 		UserHandler fh = new UserHandlerClass();
+		fh.loadUserData("users.map");
 		String option = getCommand(in);
 
 		while (!option.equals("exit")) {
@@ -25,6 +26,7 @@ public class Main {
 		}
 
 		System.out.println("Bye!");
+		fh.writeUserData("users.map");
 		in.close();
 	}
 
