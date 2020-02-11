@@ -253,11 +253,11 @@ public class Main {
 	 * Prints the available commands when being in session.
 	 */
 	private static void helpInSession() {
-		System.out.println("add 			- Adds a new program.");
-		System.out.println("remove 			- Removes a program.");
+		System.out.println("add 		- Adds a new program.");
+		System.out.println("remove 		- Removes a program.");
 		System.out.println("listprogram 	- Lists the contents of a program.");
-		System.out.println("listall 		- Lists all programs.");
-		System.out.println("quit 			- Quits current session.");
+		System.out.println("listall 	- Lists all programs.");
+		System.out.println("quit 		- Quits current session.");
 	}
 
 	/**
