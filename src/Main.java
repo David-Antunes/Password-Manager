@@ -21,7 +21,9 @@ public class Main {
 		String option = getCommand(in);
 
 		while (!option.equals("exit")) {
+			System.out.println();
 			execOption(in, fh, option);
+			System.out.println();
 			option = getCommand(in);
 		}
 
@@ -200,7 +202,9 @@ public class Main {
 		String option = getUserCommand(in, hl.getUser());
 
 		while (!option.equals("quit")) {
+			System.out.println();
 			execUserOptions(in, hl, option);
+			System.out.println();
 			option = getUserCommand(in, hl.getUser());
 		}
 		hl.clearSession();
@@ -395,7 +399,8 @@ public class Main {
 				for (int i = 0; i < extra.length; i++) {
 					System.out.print("extra: " + extra[i] + "\n");
 				}
-			System.out.println();
+			if (it.hasNext())
+				System.out.println();
 		}
 	}
 }
