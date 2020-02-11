@@ -33,12 +33,12 @@ Typing **help** will prompt with the commands available.
 ![](images/help_command.png)
 
 
-Registering is very simple.
+Registering a user by typing register, followed by a name, an email, and a password
 
 
 ![](images/register.png)
 
-Logging in is also very simple.
+Logging in by using an already registered email, and its corresponding password.
 
 ![](images/loggin.png)
 
