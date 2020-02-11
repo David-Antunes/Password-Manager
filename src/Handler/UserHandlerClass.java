@@ -133,10 +133,8 @@ public class UserHandlerClass implements UserHandler {
 			users = (Map<String, User>) inStream.readObject();
 			inStream.close();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 			System.out.println("Could not read file " + name + ".");
 		} catch (IOException e) {
-			e.printStackTrace();
 			System.out.println("file " + name + " doesn't exist.");
 		}
 
