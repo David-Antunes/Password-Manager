@@ -19,3 +19,27 @@ Type help to see available commands.
   
   Using java JDK 1.13 https://www.oracle.com/technetwork/java/javase/downloads/jdk13-downloads-5672538.html
 
+# Using it
+
+This is the screen when you run it for the first time. Don't worry about **file users.map doesn't exist.** because that is the file that saves the users. Since it is the first time running there is no file.
+
+
+![](images/first_screen.png)
+
+
+Typing **help** will prompt with the commands available.
+
+
+![](images/help_command.png)
+
+
+Logging in and registering is very simple.
+
+
+![](images/login_register.png)
+
+
+This are the commands available when in session.
+
+
+![](images/help_session.png)
