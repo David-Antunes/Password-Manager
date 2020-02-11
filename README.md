@@ -1,16 +1,10 @@
 # Password-Manager
-
-Program that stores passwords in a local file called users.map. 
-
-The file is only written upon console exit. 
-
-It manages multiple users' passwords.
-
-Run the file by executing Main.java.
-
-Its a console based program.
-
-Type help to see available commands.
+  * Program that stores passwords in a local file called users.map. 
+  * The file is only written upon console exit. 
+  * It manages multiple users' passwords.
+  * Run the file by executing Main.java.
+  * Its a console based program.
+  * Type help to see available commands.
 
 
 # Installation
