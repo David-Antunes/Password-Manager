@@ -14,14 +14,14 @@ Type help to see available commands.
 
 
 # Installation
-  I developed this using eclipse 2019-12 https://www.eclipse.org/downloads/download.php?file=/oomph/epp/2019-12/R/eclipse-inst-win64.exe
+  Developed using Eclipse 2019-12: https://www.eclipse.org/downloads/download.php?file=/oomph/epp/2019-12/R/eclipse-inst-win64.exe
   
   
-  Using java JDK 1.13 https://www.oracle.com/technetwork/java/javase/downloads/jdk13-downloads-5672538.html
+  Java JDK 1.13: https://www.oracle.com/technetwork/java/javase/downloads/jdk13-downloads-5672538.html
 
-# Using it
+# Demo
 
-This is the screen when you run it for the first time. Don't worry about **file users.map doesn't exist.** because that is the file that saves the users. Since it is the first time running there is no file.
+The program shows the console window. If running for the first time, the following text will appear: **file users.map doesn't exist.**. Being that the first time there is no file that saves the users. Once you save something the message will disapear. The file should be on the same directory as the project-
 
 
 ![](images/first_screen.png)
@@ -33,13 +33,15 @@ Typing **help** will prompt with the commands available.
 ![](images/help_command.png)
 
 
-Logging in and registering is very simple.
+Registering is very simple.
 
 
-![](images/login_register.png)
+![](images/register.png)
 
+Logging in is also very simple.
+
+![](images/loggin.png)
 
 This are the commands available when in session.
-
 
 ![](images/help_session.png)
