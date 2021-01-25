@@ -75,16 +75,7 @@ public class Main {
 			System.out.println("Unknown Command. Type help to see the available commands.");
 		}
 	}
-
-	/**
-	 * Prints the available commands without being in session.
-	 */
-	private static void helpOutSession() {
-		System.out.println("login 		- Access the account registered.");
-		System.out.println("register 	- Registers a new account.");
-		System.out.println("help 		- Shows available commands.");
-	}
-
+	
 	/**
 	 * Logins the user into the program. This method works when the scanner has two
 	 * tokens to be read, being a valid user email and its corresponding password.
